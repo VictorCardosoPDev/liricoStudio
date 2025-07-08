@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendamento - Estúdio de Tatuagem</title>
+  <link rel="stylesheet" href="agendamento.css" />
+  <script src="agendamento.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <header class="header">
+        <div class="logo"></div>
+        <div class="login-area">
+          <a href="../Página Login/login.html" class="login-button">
+            <i class="fas fa-user"></i> LOGIN
+          </a>
+        </div>
+    </header>
+    
+    <nav class="navbar">
+        <ul>
+          <li><a href="../Página Home/home.html">HOME</a></li>
+          <li><a href="../Página Portifólio/portifolio.html">PORTFÓLIO</a></li>
+          <li><a href="../Página Tatuagem/tatuagem.html">TATUAGEM</a></li>
+          <li><a href="../Página Agendamento/agendamento.html">AGENDAMENTO</a></li>
+          <li><a href="../Página Contato/contato.html">CONTATO</a></li>
+        </ul>
+    </nav>
+
+  <main class="agendamento-container">
+    <div class="faixa-agendamento">
+        AGENDE SUA SESSÃO
+    </div>
+
+    <form class="form-agendamento">
+      <div class="form-left">
+        <label>Nome</label>
+        <input type="text" placeholder="Digite seu nome" />
+
+        <label>Email</label>
+        <input type="email" placeholder="Digite seu email" />
+
+        <label>Data da Tatuagem</label>
+        <input type="date" />
+      </div>
+
+      <div class="form-right">
+        <label>Horário</label>
+        <input type="time" />
+
+        <label>Telefone para Contato</label>
+        <input type="tel" placeholder="(xx) xxxxx-xxxx" />
+      </div>
+    </form>
+  </main>
+
+  <div class="banner-final">
+    BANNER
+  </div>  
+
+  <script>
+  document.querySelectorAll("nav a").forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>

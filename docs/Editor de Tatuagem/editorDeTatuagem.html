@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Tatuagem 3D</title>
+  <link rel="stylesheet" href="../Página Portifólio/portifolio.css" />
+  <link rel="stylesheet" href="editorDeTatuagem.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.0/examples/jsm/"
+    }
+  }
+  </script>
+  <link rel="icon" type="image/png" href="../Imagens/simbolo-lirico.png" />
+</head>
+<body>
+  <!-- TOPO PADRÃO PORTIFÓLIO -->
+  <header class="topo">
+    <nav class="nav-superior">
+      <ul class="menu">
+        <li><a href="../index.html">HOME</a></li>
+        <li><a href="../Página Portifólio/portifolio.html">PORTFÓLIO</a></li>
+        <li><a href="../Página Tatuagem/tatuagem.html">TATUAGEM</a></li>
+        <li><a href="../Editor de Tatuagem/editorDeTatuagem.html">SIMULAÇÃO DE TATUAGEM</a></li>
+        <li><a href="../Página Contato/contato.html">CONTATO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Simule sua Tatuagem em 3D</h2>
+    <div class="main-layout">
+      <!-- Coluna das tatuagens -->
+      <div class="tattoo-section">
+        <div class="tattoo-title">Ideias de Tatuagem</div>
+        <div class="tattoo-options">
+          <img src="assets/tattoos/tattoo-ideia1.png" class="tattoo-option" alt="Tatuagem 1" data-tattoo-id="1" />
+          <img src="assets/tattoos/tattoo-ideia2.png" class="tattoo-option" alt="Tatuagem 2" data-tattoo-id="2" />
+          <img src="assets/tattoos/tattoo-ideia3.png" class="tattoo-option" alt="Tatuagem 3" data-tattoo-id="3" />
+          <img src="assets/tattoos/tattoo-ideia4.png" class="tattoo-option" alt="Tatuagem 4" data-tattoo-id="4" />
+          <img src="assets/tattoos/tattoo-ideia5.png" class="tattoo-option" alt="Tatuagem 5" data-tattoo-id="5" />
+          <img src="assets/tattoos/tattoo-ideia6.png" class="tattoo-option" alt="Tatuagem 6" data-tattoo-id="6" />
+          <img src="assets/tattoos/tattoo-ideia7.png" class="tattoo-option" alt="Tatuagem 7" data-tattoo-id="7" />
+          <img src="assets/tattoos/tattoo-ideia8.png" class="tattoo-option" alt="Tatuagem 8" data-tattoo-id="8" />
+          <img src="assets/tattoos/tattoo-ideia9.png" class="tattoo-option" alt="Tatuagem 9" data-tattoo-id="9" />
+          <img src="assets/tattoos/tattoo-ideia10.png" class="tattoo-option" alt="Tatuagem 10" data-tattoo-id="10" />
+          <img src="assets/tattoos/tattoo-ideia11.png" class="tattoo-option" alt="Tatuagem 11" data-tattoo-id="11" />
+          <img src="assets/tattoos/tattoo-ideia12.png" class="tattoo-option" alt="Tatuagem 12" data-tattoo-id="12" />
+          <img src="assets/tattoos/tattoo-ideia13.png" class="tattoo-option" alt="Tatuagem 13" data-tattoo-id="13" />
+          <img src="assets/tattoos/tattoo-ideia14.png" class="tattoo-option" alt="Tatuagem 14" data-tattoo-id="14" />
+          <img src="assets/tattoos/tattoo-ideia15.png" class="tattoo-option" alt="Tatuagem 15" data-tattoo-id="15" />
+          <!-- Adicione mais imagens se quiser -->
+        </div>
+
+        <div class="upload-container">
+          <label for="custom-upload" class="custom-upload-label">
+            Enviar imagem personalizada
+          </label>
+          <input type="file" id="custom-upload" accept="image/*" class="hidden" />
+        </div>
+
+        <!-- Controles de edição de tatuagem -->
+        <div id="tattoo-controls" class="tattoo-controls hidden">
+          <h3>Editar Tatuagem</h3>
+          <div class="control-group">
+            <label>Opacidade:</label>
+            <input type="range" id="opacity-control" min="0" max="100" value="100" disabled />
+          </div>
+          <div class="control-group">
+            <label>Tamanho:</label>
+            <input type="range" id="size-control" min="50" max="800" value="200" disabled />
+          </div>
+          <div class="control-group">
+            <label>Rotação:</label>
+            <input type="range" id="rotation-control" min="0" max="360" value="0" disabled />
+          </div>
+          <div class="control-buttons">
+            <button id="delete-tattoo-btn" disabled>Excluir</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas do Three.js -->
+      <div id="editor3D-container">
+        <div id="loading-indicator" style="display: none;">Carregando modelo...</div>
+      </div>
+
+      <!-- Ferramentas -->
+      <div class="toolbox">
+        <button id="download-btn">Baixar Simulação</button>
+        <button id="clear-btn">Limpar</button>
+        <button id="reset-view-btn">Resetar Visão</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- RODAPÉ PADRÃO PORTIFÓLIO -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <div class="rodape-coluna">
+        <h4>Menu Rápido</h4>
+        <ul class="rodape-menu">
+          <li><a href="../Página Home/home.html">Home</a></li>
+          <li><a href="../Página Portifólio/portifolio.html">Portfólio</a></li>
+          <li><a href="../Página Tatuagem/tatuagem.html">Tatuagem</a></li>
+          <li><a href="../Editor de Tatuagem/editorDeTatuagem.html">Simulação de Tatuagem</a></li>
+          <li><a href="../Página Contato/contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="rodape-coluna">
+        <h4>Endereço do Estúdio</h4>
+        <p>
+          Av. Dezessete de Abril, 935 - Guajuviras, Canoas<br>
+          <a href="https://www.google.com/maps?q=Avenida+17+de+abril+935,+Canoas" target="_blank" class="rodape-mapa">Ver no mapa</a>
+        </p>
+        <p>
+          R. Cem C, 1 - Guajuviras, Canoas<br>
+          <a href="https://maps.app.goo.gl/vkG1nLiMGXtcF8cPA" target="_blank" class="rodape-mapa">Ver no mapa</a>
+        </p>
+        <h4>Horário de Funcionamento</h4>
+        <p>Seg a Sex, 9h às 20h</p>
+      </div>
+      <div class="rodape-coluna">
+        <h4>Contato Rápido</h4>
+        <p>Telefone/WhatsApp: <br>
+          (51) 99235-6577  <br>
+          (51) 98156-8634</p>
+        <h4>Redes Sociais</h4>
+        <div class="rodape-redes">
+          <a href="https://www.instagram.com/jefin.tattoo/?igsh=Y2M5anNvd3dydmdj&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.instagram.com/viviantattoo/?igsh=OG56aHV6Y3pyd2Zv" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="rodape-frase">
+      <span>Arte na pele, alma no traço.</span>
+    </div>
+
+    <!-- Chatbot -->
+  <div class="chat-button" id="chat-button" title="Quer uma sugestão?">
+    <img class="mandalaIcon" src="../Imagens/simbolo-lirico.png">
+  </div>
+
+
+  <div class="chat-container" id="chat-container">
+    <div class="chat-header">
+      <span><strong>Olá, precisa de uma ideia de tatuagem?</strong></span>
+      <button id="close-chat">X</button>
+    </div>
+    <div class="chat-body chat-messages" id="chat-messages">
+
+      <!-- Aqui vão aparecer as mensagens -->
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>
+    <button class="voltar-topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" title="Voltar ao topo">&#8679;</button>
+  </footer>
+
+  <script type="module" src="editorDeTatuagem.js"></script>
+</body>
+</html>

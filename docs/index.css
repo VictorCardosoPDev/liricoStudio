@@ -55,7 +55,7 @@ body {
 .banner-topo {
   width: 100vw;
   height: 100vh;
-  background-image: url('../Imagens/background-home.jpg');
+  background-image: url('Imagens/background-home.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -67,7 +67,7 @@ body {
 
 /* APRESENTAÇÃO */
 .mandala-bg {
-  background-image: url('../Imagens/mandala-fundo.png'), url('../Imagens/fundo-background.png');
+  background-image: url('Imagens/mandala-fundo.png'), url('Imagens/fundo-background.png');
   background-repeat: no-repeat, no-repeat;
   background-size: contain, cover;
   background-position: center top, center;

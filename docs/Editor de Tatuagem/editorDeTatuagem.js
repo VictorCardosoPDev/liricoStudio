@@ -63,7 +63,7 @@ function init() {
   const loader = new GLTFLoader();
   document.getElementById('loading-indicator').style.display = 'block';
 
-  loader.load('assets/models/Human_Body.glb', function(gltf) {
+  loader.load('assets/models/human_body.glb', function(gltf) {
     model = gltf.scene;
     model.scale.set(1.5, 1.5, 1.5);
 
